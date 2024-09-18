@@ -17,5 +17,5 @@ public:
 private:
 	int hiScore = 0;
 	Player player;
-	std::vector<Asteroid> asteroids;
+	std::vector<Asteroid*> asteroids;
 };

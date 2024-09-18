@@ -2,6 +2,8 @@
 
 void Game::Run()
 {
+	asteroids.push_back(new Asteroid);
+
 	while (true)
 	{
 		hiScore++;
@@ -15,7 +17,7 @@ void Game::Run()
 		//Draw asteroids
 		for(auto asteroid : asteroids)
 		{
-			asteroid.Draw();
+			asteroid->Draw();
 		}
 	}
 }

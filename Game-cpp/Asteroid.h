@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
+#include "Colors.h"
 
-class Asteroid
+class Asteroid: public Colors
 {
 public:
 	Asteroid()
@@ -10,4 +11,7 @@ public:
 	}
 
 	void Draw();
+
+private:
+	Colors colors;
 };
