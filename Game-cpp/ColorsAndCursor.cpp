@@ -1,5 +1,5 @@
 #pragma once
-#include "Colors.h"
+#include "ColorsAndCursor.h"
 
 /*
 Color codes for SetColor()
@@ -21,7 +21,7 @@ Color codes for SetColor()
 15 = Bright White
 */
 
-void Colors::SetColor(int textColor, int backgroundColor)
+void ColorsAndCursor::SetColor(int textColor, int backgroundColor)
 {
 	// Avoiding errors in case someone were to input an invalid color code.
 	if ((0 <= textColor && textColor <= 15) && (0 <= backgroundColor && backgroundColor <= 15))
@@ -32,13 +32,26 @@ void Colors::SetColor(int textColor, int backgroundColor)
 	}
 }
 
-void Colors::SetColor(int textColor)
+void ColorsAndCursor::SetColor(int textColor)
 {
 	// 0 is black (default bg color).
 	SetColor(textColor, 0);
 }
 
-void Colors::ResetColor()
+void ColorsAndCursor::ResetColor()
 {
 	SetColor(7, 0); // White and black
+}
+
+void ColorsAndCursor::SetCursorPosition(int x, int y)
+{
+	// Get the handle to the console window
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	// Set the cursor position
+	COORD position;
+	position.X = x;
+	position.Y = y;
+
+	SetConsoleCursorPosition(consoleHandle, position);
 }

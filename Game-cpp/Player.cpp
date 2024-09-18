@@ -36,25 +36,43 @@ void Player::HandleInputs()
 
 void Player::MoveLeft()
 {
-
+    x -= 1;
 }
 
 void Player::MoveRight()
 {
-
+    x += 1;
 }
 
 void Player::MoveUp()
 {
-
+    x -= 1;
 }
 
 void Player::MoveDown()
 {
-
+    x += 1;
 }
 
 void Player::Draw()
 {
+    // Draw top part of the ship in blue
+    SetColor(1);
+    SetCursorPosition(x - 3, y - 2);
+    std::cout << " / \\\n";
 
+    // Draw middle part of the ship in white
+    SetColor(7);
+    SetCursorPosition(x - 3, y - 2);
+    std::cout << " |o|\n";
+
+    // Draw bottom part of the ship in blue
+    SetColor(1);
+    SetCursorPosition(x - 3, y - 2);
+    std::cout << "/_ _\\\n";
+
+    // Draw thrusters in red
+    SetColor(4);
+    SetCursorPosition(x - 3, y - 2);
+    std::cout << " ^ ^\n";
 }

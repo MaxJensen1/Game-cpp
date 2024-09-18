@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 
-class Colors
+class ColorsAndCursor
 {
 protected:
 	/// <summary>
@@ -24,4 +24,7 @@ protected:
 	/// Sets the color to default (white text, black bg).
 	/// </summary>
 	void ResetColor();
+
+
+	void SetCursorPosition(int x, int y);
 };

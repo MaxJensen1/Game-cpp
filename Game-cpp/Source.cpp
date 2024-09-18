@@ -3,17 +3,17 @@
 #include <Windows.h>
 #include "Game.h"
 
-void ConsoleSize(int, int);
+void SetNewConsoleSize(int, int);
 
 int main()
 {
-    ConsoleSize(100, 25);
+    SetNewConsoleSize(80, 60);
 
     Game game;
 	game.Run();
 }
 
-void ConsoleSize(int width, int height) 
+void SetNewConsoleSize(int width, int height) 
 {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD size; // Has an x and y coordinate (width and height)

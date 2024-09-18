@@ -12,12 +12,29 @@ void Game::Run()
 
 		system("CLS");
 
-		
-
 		//Draw asteroids
 		for(auto asteroid : asteroids)
 		{
 			asteroid->Draw();
 		}
+
+		player.Draw();
+
+
 	}
+}
+
+void Game::AsteroidsAndCollision()
+{
+
+}
+
+void Game::ContinueOrExit()
+{
+
+}
+
+void Game::Reset()
+{
+
 }

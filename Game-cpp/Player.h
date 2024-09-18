@@ -1,19 +1,17 @@
 #pragma once
 #include <iostream>
-#include "GameObject.h"
+#include "ColorsAndCursor.h"
 
-class Player
+class Player: public ColorsAndCursor
 {
 public:
-	Player()
-	{
-
-	}
-
 	void HandleInputs();
 	void MoveLeft();
 	void MoveRight();
 	void MoveUp();
 	void MoveDown();
 	void Draw();
+
+	int x;
+	int y;
 };
