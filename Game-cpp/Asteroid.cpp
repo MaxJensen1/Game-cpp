@@ -3,7 +3,7 @@
 void Asteroid::Draw()
 {
 	SetColor(4);
-	SetCursorPosition(x, y);
+	SetCursorPosition(x, y + 1);
 	std::cout << "O\n";
 	
 	SetColor(6);
@@ -11,7 +11,15 @@ void Asteroid::Draw()
 	std::cout << "|\n";
 }
 
-void Asteroid::Fall(int fallSpeed)
+bool Asteroid::Fall(int fallSpeed)
 {
-	y += fallSpeed;
+	if (y <= ScreenHeight() - 4)
+	{
+		y += fallSpeed;
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

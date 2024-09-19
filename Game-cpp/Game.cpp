@@ -2,6 +2,7 @@
 
 void Game::Run()
 {
+	//levelTimer.Start();
 	while (true)
 	{
 		hiScore++;
@@ -9,49 +10,39 @@ void Game::Run()
 		player.Draw();
 		player.HandleInputs();
 
+		// Update and check the timer
+		levelTimer.UpdateTimer(hiScore);
+
+		/*if (levelTimer.timeInSeconds <= 0)
+		{
+			std::cout << "restart" << std::endl;
+			levelTimer = CountdownTimer(15);
+			levelTimer.Start();
+		}*/
+
 		asteroidSpawner.SpawnAsteroid(difficulty.asteroidSpawnAmount, asteroids);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(15));
+		for (auto asteroid = asteroids.begin(); asteroid != asteroids.end();)
+		{
+			if ((*asteroid)->Fall(asteroidFallSpeed)) // Returns true when asteroids have reached the bottom
+			{
+				delete* asteroid; // Delete the asteroid
+				asteroid = asteroids.erase(asteroid); // Erase from the vector
+			}
+			else
+			{
+				(*asteroid)->Draw(); // Draw the asteroid if it's not deleted
+				++asteroid; // Move to the next asteroid
+			}
+
+			/*if (player.IsCollision(asteroid))
+			{
+				std::cout << "take damage" << std::endl;
+			}*/
+		}
+
+	    std::this_thread::sleep_for(std::chrono::milliseconds(25));
 	}
-
-	/*CountdownTimer timer(15);
-	timer.Start();*/
-
-	//while (true)
-	//{
-	//	hiScore++;
-
-	//	player.HandleInputs();
-
-	//	system("CLS");
-
-	//	player.Draw();
-
-	//	// timer stuff
-
-	//	//asteroidSpawner.SpawnAsteroid(difficulty.asteroidSpawnAmount, asteroids);
-
-	//	//Draw asteroids and check collision
-	//	for (auto asteroid : asteroids)
-	//	{
-	//		asteroid->Draw();
-
-	//		/*if (player.IsCollision(asteroid))
-	//		{
-	//			player.lifePoints--;
-	//		}*/
-	//	}
-
-	//	if (player.lifePoints <= 0)
-	//	{
-	//		ContinueOrExit();
-	//	}
-
-	//	/*if (timer.timeInSeconds <= 0)
-	//	{
-	//		difficulty.IncreaseDifficulty();
-	//	}*/
-	//}
 }
 
 void Game::AsteroidsAndCollision()

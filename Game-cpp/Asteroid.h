@@ -11,7 +11,7 @@ public:
 	Asteroid(int X, int Y) : x(X), y(Y) {}
 
 	void Draw();
-	void Fall(int fallSpeed);
+	bool Fall(int fallSpeed);
 
 	int x;
 	int y;
