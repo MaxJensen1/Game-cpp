@@ -55,3 +55,23 @@ void ColorsAndCursor::SetCursorPosition(int x, int y)
 
 	SetConsoleCursorPosition(consoleHandle, position);
 }
+
+int ColorsAndCursor::ScreenWidth()
+{
+	// Retrieve console buffer info
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+
+	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	return width;
+}
+
+int ColorsAndCursor::ScreenHeight()
+{
+	// Retrieve console buffer info
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+
+	int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+	return height;
+}

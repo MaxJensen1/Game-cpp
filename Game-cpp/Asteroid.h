@@ -1,14 +1,17 @@
 #pragma once
 #include <iostream>
+#include <random>
+#include <vector>
 #include "ColorsAndCursor.h"
 #include "Player.h"
 
 class Asteroid : public ColorsAndCursor
 {
 public:
+	Asteroid(int X, int Y) : x(X), y(Y) {}
+
 	void Draw();
 	void Fall(int fallSpeed);
-	bool IsCollision(Player player);
 
 	int x;
 	int y;

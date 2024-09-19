@@ -48,9 +48,8 @@ void Difficulty::IncreaseDifficulty()
 
 void Difficulty::DifficultyText()
 {
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-
     // Retrieve console buffer info
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
     int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
@@ -69,7 +68,7 @@ void Difficulty::DifficultyCountdown()
 
 }
 
-void Difficulty::CountdownToText(int seconds)
+void Difficulty::CountdownToText(int seconds, bool& canSpawnAsteroid)
 {
     canSpawnAsteroid = false;
 

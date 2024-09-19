@@ -27,4 +27,8 @@ protected:
 
 
 	void SetCursorPosition(int x, int y);
+
+	int ScreenWidth();
+
+	int ScreenHeight();
 };

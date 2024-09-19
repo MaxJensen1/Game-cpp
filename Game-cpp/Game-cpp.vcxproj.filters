@@ -42,6 +42,12 @@
     <ClCompile Include="CountdownTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AsteroidSpawner.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidSpawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

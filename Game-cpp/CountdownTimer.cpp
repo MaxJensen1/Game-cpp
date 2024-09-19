@@ -1,6 +1,4 @@
 #include "CountdownTimer.h"
-#include <iostream>
-#include <iomanip> // For std::setw
 
 CountdownTimer::CountdownTimer(int initialTimeInSeconds)
     : timeInSeconds(initialTimeInSeconds), running(false)
@@ -11,6 +9,8 @@ CountdownTimer::CountdownTimer(int initialTimeInSeconds)
 
 void CountdownTimer::Start() // Starts the timer
 {
+    if (running) { return; } // Prevent starting a new thread if it's already running
+
     running = true;
     start = std::chrono::high_resolution_clock::now(); // Restart stopwatch
     TimerThread = std::thread(&CountdownTimer::Run, this);
@@ -27,27 +27,23 @@ void CountdownTimer::Stop() // Stops the timer
 
 void CountdownTimer::UpdateTimer(int hiscore)
 {
-    if (timeInSeconds <= 0)
-    {
-        timeInSeconds = 16; // Restart timer
-    }
-
     auto now = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = now - start;
 
-    if (elapsed.count() >= 1.0) // 1 second passed
+    if (elapsed.count() >= 1.0) // 1 second has passed
     {
         timeInSeconds--;
         start = std::chrono::high_resolution_clock::now(); // Restart stopwatch
+        DrawTimer(hiscore); // Draw the timer after updating
     }
-
-    DrawTimer(hiscore); // Draws the timer every time the time updates
 }
 
 void CountdownTimer::DrawTimer(int hiscore)
 {
+    SetCursorPosition(0, 0);
     // Clear the console line
-    std::cout << "\r" << std::setw(20) << std::left << "HI-Score: " << hiscore << " \t\t\t\tTime remaining: " << std::max(0, timeInSeconds) << " s";
+    std::cout << "HI-Score: " << hiscore << " \t\t\t\tTime remaining: " << timeInSeconds << " s";
+    SetCursorPosition(0, 1); // So it doesn't cover up the text
     std::cout.flush(); // Make sure the output is immediately visible
 }
 

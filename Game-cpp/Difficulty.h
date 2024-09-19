@@ -10,7 +10,7 @@ class Difficulty: public ColorsAndCursor
 {
 public:
 	Player* player;
-	Difficulty(Player* input) : player(input) {}
+	//Difficulty(Player input) : player(input) {}
 
 	int asteroidSpawnAmount = 10; // How many asteroids that spawn, percentage value. 100% is the most, 1% is lowest.
 	int asteroidFallSpeed = 1;
@@ -21,5 +21,5 @@ public:
 	void IncreaseDifficulty();
 	void DifficultyText();
 	void DifficultyCountdown();
-	void CountdownToText(int);
+	void CountdownToText(int, bool&);
 };
