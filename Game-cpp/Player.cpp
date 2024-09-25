@@ -19,11 +19,6 @@ void Player::HandleInputs()
     {
         MoveRight();
     }
-    if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) // Check if ESC key is pressed
-    {
-        std::cout << "Escape key pressed, exiting...\n";
-        exit(0);
-    }
 }
 
 void Player::MoveLeft()
@@ -79,6 +74,12 @@ void Player::Draw()
     SetColor(4);
     SetCursorPosition(x - 3, y + 1);
     std::cout << " ^ ^" << std::endl;
+}
+
+void Player::SetDefaultPos()
+{
+    x = ScreenWidth() / 2;
+    y = ScreenHeight() - 3;
 }
 
 //bool Player::IsCollision(Asteroid* asteroid)

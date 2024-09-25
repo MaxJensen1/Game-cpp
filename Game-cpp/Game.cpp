@@ -11,14 +11,12 @@ void Game::Run()
 		player.HandleInputs();
 
 		// Update and check the timer
-		levelTimer.UpdateTimer(hiScore);
-
-		/*if (levelTimer.timeInSeconds <= 0)
+		if (levelTimer.UpdateTimer(hiScore, secondsPerLevel) >= secondsPerLevel)
 		{
-			std::cout << "restart" << std::endl;
-			levelTimer = CountdownTimer(15);
-			levelTimer.Start();
-		}*/
+			levelTimer = CountdownTimer(secondsPerLevel);
+			levelTimer.StartAndRestart();
+			ContinueOrExit();
+		}
 
 		asteroidSpawner.SpawnAsteroid(difficulty.asteroidSpawnAmount, asteroids);
 
@@ -45,17 +43,43 @@ void Game::Run()
 	}
 }
 
-void Game::AsteroidsAndCollision()
-{
-
-}
-
 void Game::ContinueOrExit()
 {
+	system("CLS");
+	std::cout << "Game over!" << "\n";
+	if (difficulty.difficulty > 1)
+	{
+		std::cout << "Completed levels: " << (difficulty.difficulty - 1) << "\n";
+	}
+	else
+	{
+		std::cout << "Completed levels: " << (difficulty.difficulty) << "\n";
+	}
+	std::cout << "HI-Score: " << hiScore << "\n";
+	std::cout << "Press [ESC] to exit or [ENTER] to play again." << "\n";
 
+	std::cin;
+
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) // Check if ESC key is pressed
+	{
+		std::cout << "Escape key pressed, exiting...\n";
+		exit(0);
+	}
+	else if (GetAsyncKeyState(VK_RETURN) & 0x8000) 
+	{
+		Reset();
+		Run();
+	}
+	else // Causing flickering because the funciton is called over and over again
+	{
+		ContinueOrExit();
+	}
 }
 
 void Game::Reset()
 {
-
+	asteroids.clear();
+	player.SetDefaultPos();
+	asteroidFallSpeed = 1;
+	asteroidSpawnAmount = 10;
 }

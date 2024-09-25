@@ -20,6 +20,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void Draw();
+	void SetDefaultPos();
 	//bool IsCollision(Asteroid* asteroid);
 
 	int x;

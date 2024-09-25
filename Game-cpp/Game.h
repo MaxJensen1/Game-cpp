@@ -13,7 +13,7 @@
 class Game: public ColorsAndCursor
 {
 public:
-	Game(): player(5, 4), levelTimer(15)
+	Game(): player(5, 4), levelTimer(secondsPerLevel)
 	{
 
 	}
@@ -25,6 +25,7 @@ private:
 	int asteroidSpawnAmount = 10; // How many asteroids that spawn, percentage value. 100% is the most, 1% is lowest.
 	int asteroidFallSpeed = 1;
 	int gameUpdateTime = 100;
+	int secondsPerLevel = 2;
 	std::vector<Asteroid*> asteroids;
 	Player player;
 
@@ -32,7 +33,7 @@ private:
 	AsteroidSpawner asteroidSpawner;
 	CountdownTimer levelTimer;
 
-	void AsteroidsAndCollision();
+	//void AsteroidsAndCollision();
 	void ContinueOrExit();
 	void Reset();
 };
