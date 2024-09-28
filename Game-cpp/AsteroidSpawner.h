@@ -8,4 +8,5 @@ class AsteroidSpawner: public ColorsAndCursor
 {
 public:
 	void SpawnAsteroid(int percentage, std::vector<Asteroid*>& asteroids);
+	bool spawnAsteroids = true;
 };

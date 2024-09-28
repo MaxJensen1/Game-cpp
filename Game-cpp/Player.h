@@ -5,6 +5,9 @@
 #include <conio.h> // For _kbhit() and _getch()
 #include "Asteroid.h"
 #include <windows.h>
+#include <vector>
+
+class Asteroid;
 
 class Player: public ColorsAndCursor
 {
@@ -13,6 +16,8 @@ public:
 	{
 		x = X;
 		y = Y;
+
+		SetDefaultPos();
 	}
 	void HandleInputs();
 	void MoveLeft();
@@ -21,7 +26,7 @@ public:
 	void MoveDown();
 	void Draw();
 	void SetDefaultPos();
-	//bool IsCollision(Asteroid* asteroid);
+	bool IsCollision(std::vector<Asteroid*> asteroids);
 
 	int x;
 	int y;

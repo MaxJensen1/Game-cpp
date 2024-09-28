@@ -23,7 +23,7 @@ void Player::HandleInputs()
 
 void Player::MoveLeft()
 {
-    if (x >= 4)
+    if (x >= 5)
     {
         x -= 2;
     }
@@ -82,17 +82,25 @@ void Player::SetDefaultPos()
     y = ScreenHeight() - 3;
 }
 
-//bool Player::IsCollision(Asteroid* asteroid)
-//{
-//    // Collision box for top, middle, and bottom part of the ship
-//    int toleranceTop = 1;
-//    int toleranceMiddle = 1;
-//    int toleranceBottom = 2;
-//
-//    // Adjust the X coordinates in the collision checks to make the collision box wider
-//    bool topCollision = abs(x + 1 - asteroid->x) <= toleranceTop && y == asteroid->y; // Checks only the y-level it's on
-//    bool middleCollision = abs(x + 1 - asteroid->x) <= toleranceMiddle && abs(y - asteroid->y) <= 1; // Checks its y-level and the one above
-//    bool bottomCollision = abs(x + 1 - asteroid->x) <= toleranceBottom && abs(y - asteroid->y) <= 2; // Checks two y'levels above
-//
-//    return topCollision || middleCollision || bottomCollision; // If one is true, it returns true. If all are false it returns false
-//}
+bool Player::IsCollision(std::vector<Asteroid*> asteroids)
+{
+    for (auto asteroid : asteroids)
+    {
+        // Collision box for top, middle, and bottom part of the ship
+        int toleranceTop = 1;
+        int toleranceMiddle = 1;
+        int toleranceBottom = 2;
+
+        // Adjust the X coordinates in the collision checks to make the collision box wider
+        bool topCollision = abs(x - 1 - asteroid->x) <= toleranceTop && y - 2 == asteroid->y; // Checks only the y-level it's on
+        bool middleCollision = abs(x - 1 - asteroid->x) <= toleranceMiddle && abs(y - asteroid->y) == 1;
+        bool bottomCollision = abs(x - 1 - asteroid->x) <= toleranceBottom && abs(y - asteroid->y) <= 0;
+
+        if (topCollision || middleCollision || bottomCollision) // If a collision is detected, return true
+        {
+            return true;
+        }
+    }
+
+    return false; // If no collision is detected after checking all asteroids, return false
+}

@@ -3,11 +3,11 @@
 void Asteroid::Draw()
 {
 	SetColor(4);
-	SetCursorPosition(x, y + 1);
+	SetCursorPosition(x, y);
 	std::cout << "O\n";
 	
 	SetColor(6);
-	SetCursorPosition(x, y);
+	SetCursorPosition(x, y - 1);
 	std::cout << "|\n";
 }
 

@@ -2,6 +2,11 @@
 
 void AsteroidSpawner::SpawnAsteroid(int spawnPercentage, std::vector<Asteroid*>& asteroids)
 {
+	if (!spawnAsteroids) // Return if it shouldn't do anything
+	{
+		return;
+	}
+
 	// Initialize random number generators
 	std::random_device rd;  // Random device to seed the generator
 	std::mt19937 generator(rd()); // mt stands for Mersenne Twister random number generator

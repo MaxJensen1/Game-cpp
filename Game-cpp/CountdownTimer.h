@@ -8,15 +8,17 @@
 class CountdownTimer: public ColorsAndCursor
 {
 public:
-    CountdownTimer(int secondsPerLevel): timeInSeconds(secondsPerLevel), running(false) 
+    CountdownTimer(int seconds): timeInSeconds(seconds), running(false) 
     {
         // Initialize the stopwatch
         start = std::chrono::high_resolution_clock::now();
     }
 
-    void StartAndRestart(); // Starts the timer
+    void Start(); // Starts the timer
+    void Restart();
     void Stop(); // Stops the timer
-    double UpdateTimer(int hiscore, int secondsPerLevel);
+    float UpdateTimer(int hiscore, float secondsPerLevel, bool drawTimer);
+    float UpdateTimer(float secondsPerLevel);
     int timeInSeconds;
 
 private:

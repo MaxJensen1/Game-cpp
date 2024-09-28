@@ -59,23 +59,6 @@ void Difficulty::DifficultyText()
     int left = (width - message.length()) / 2;
     int top = height / 2;
 
-    SetCursorPosition(width, top);
+    SetCursorPosition(left, top);
     std::cout << message << std::endl;
-}
-
-void Difficulty::DifficultyCountdown()
-{
-
-}
-
-void Difficulty::CountdownToText(int seconds, bool& canSpawnAsteroid)
-{
-    canSpawnAsteroid = false;
-
-    for (int i = 0; i < seconds; i++)
-    {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
-
-    DifficultyText();
 }

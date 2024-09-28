@@ -7,7 +7,7 @@ void SetNewConsoleSize(int, int);
 
 int main()
 {
-    SetNewConsoleSize(80, 60);
+    SetNewConsoleSize(80, 50);
 
     Game game;
 	game.Run();
