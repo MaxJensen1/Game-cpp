@@ -7,9 +7,10 @@ void Game::Run()
 
 	while (true)
 	{
-		system("CLS"); // Clear the console
+		//system("CLS"); // Clear the console
 
-		player.Draw();
+		player.AddToDrawQueue(drawing);
+		drawing.DrawGame();
 		player.HandleInputs();
 		LevelsCheck(); // Keeps track of the levels with timers, draws timer and Hi-Score and increases difficulty
 		HandleAsteroids(); // Spawn asteroids, draw them and check collisions with the player

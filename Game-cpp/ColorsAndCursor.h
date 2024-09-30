@@ -26,7 +26,6 @@ protected:
 		BRIGHT_WHITE = 15
 	};
 
-
 	/// <summary>
 	/// Input color code 0-15 for text and background.
 	/// </summary>

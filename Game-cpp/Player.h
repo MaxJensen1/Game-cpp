@@ -1,11 +1,10 @@
 #pragma once
 #include <iostream>
-#include "ColorsAndCursor.h"
-#include <map>
-#include <conio.h> // For _kbhit() and _getch()
-#include "Asteroid.h"
 #include <windows.h>
 #include <vector>
+#include "ColorsAndCursor.h"
+#include "Asteroid.h"
+#include "Drawing.h"
 
 class Asteroid;
 
@@ -24,11 +23,15 @@ public:
 	void MoveRight();
 	void MoveUp();
 	void MoveDown();
-	void Draw();
+	void AddToDrawQueue(Drawing& drawing);
 	void SetDefaultPos();
 	bool IsCollision(std::vector<Asteroid*> asteroids);
 
 	int x;
 	int y;
 	int lifePoints = 3;
+
+private:
+	int prevX;
+	int prevY;
 };

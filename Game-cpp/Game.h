@@ -9,6 +9,7 @@
 #include "AsteroidSpawner.h"
 #include "CountdownTimer.h"
 #include "ColorsAndCursor.h"
+#include "Drawing.h"
 
 class Game: public ColorsAndCursor
 {
@@ -38,6 +39,7 @@ private:
 	CountdownTimer levelTimer;
 	CountdownTimer timerBetweenLevels;
 	CountdownTimer asteroidFallTimer;
+	Drawing drawing;
 
 private:
 	void LevelsCheck();

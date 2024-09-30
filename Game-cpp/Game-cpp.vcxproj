@@ -135,6 +135,7 @@
     <ClCompile Include="CountdownTimer.h" />
     <ClCompile Include="Difficulty.cpp" />
     <ClCompile Include="Difficulty.h" />
+    <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="ColorsAndCursor.h" />
+    <ClInclude Include="Drawing.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
