@@ -31,7 +31,7 @@ void Player::MoveLeft()
 
 void Player::MoveRight()
 {
-    if (x <= ScreenWidth() - 4)
+    if (x <= GetConsoleWidth() - 4)
     {
         x += 2;
     }
@@ -47,7 +47,7 @@ void Player::MoveUp()
 
 void Player::MoveDown()
 {
-    if (y <= ScreenHeight() - 4)
+    if (y <= GetConsoleHeight() - 4)
     {
         y += 1;
     }
@@ -56,30 +56,30 @@ void Player::MoveDown()
 void Player::Draw()
 {
     // Draw top part of the ship in blue
-    SetColor(1);
+    SetColor(BLUE);
     SetCursorPosition(x - 3, y - 2);
     std::cout << " / \\" << std::endl;
 
     // Draw middle part of the ship in white
-    SetColor(7);
+    SetColor(WHITE);
     SetCursorPosition(x - 3, y - 1);
     std::cout << " |o|" << std::endl;
 
     // Draw bottom part of the ship in blue
-    SetColor(1);
+    SetColor(BLUE);
     SetCursorPosition(x - 3, y);
     std::cout << "/_ _\\" << std::endl;
 
     // Draw thrusters in red
-    SetColor(4);
+    SetColor(RED);
     SetCursorPosition(x - 3, y + 1);
     std::cout << " ^ ^" << std::endl;
 }
 
 void Player::SetDefaultPos()
 {
-    x = ScreenWidth() / 2;
-    y = ScreenHeight() - 3;
+    x = GetConsoleWidth() / 2;
+    y = GetConsoleHeight() - 3;
 }
 
 bool Player::IsCollision(std::vector<Asteroid*> asteroids)

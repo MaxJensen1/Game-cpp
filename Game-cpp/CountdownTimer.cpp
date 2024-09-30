@@ -40,15 +40,15 @@ float CountdownTimer::UpdateTimer(float seconds)
 void CountdownTimer::DrawTimer(int hiscore, double countdown, int secondsPerLevel)
 {
     SetCursorPosition(0, 0);
-    SetColor(3);
+    SetColor(AQUA);
     std::cout << "HI-Score: ";
-    SetColor(7);
+    SetColor(BRIGHT_WHITE);
     std::cout << hiscore;
 
-    SetCursorPosition(ScreenWidth() - 22, 0);
+    SetCursorPosition(GetConsoleWidth() - 22, 0);
     int timerSeconds = std::abs(static_cast<int>(std::round(countdown) - secondsPerLevel));
-    SetColor(3);
+    SetColor(AQUA);
     std::cout << "Time remaining: ";
-    SetColor(7);
+    SetColor(BRIGHT_WHITE);
     std::cout << timerSeconds << " s";
 }

@@ -25,6 +25,7 @@ void Game::LevelsCheck()
 	// Update and check the timer
 	if (levelActive && levelTimer.UpdateTimer(hiScore, secondsPerLevel, true) >= secondsPerLevel)
 	{
+		difficulty.IncreaseDifficulty();
 		asteroidSpawner.spawnAsteroids = false;
 		levelTimer.Stop();
 		levelActive = false;
@@ -76,11 +77,11 @@ void Game::HandleAsteroids()
 
 void Game::ContinueOrExit()
 {
-	SetColor(12);
+	SetColor(LIGHT_RED);
 	system("CLS");
 	std::cout << "Game over!" << "\n";
 
-	SetColor(7);
+	SetColor(WHITE);
 	if (difficulty.difficulty > 1)
 	{
 		std::cout << "Completed levels: " << (difficulty.difficulty - 1) << "\n";
@@ -97,7 +98,7 @@ void Game::ContinueOrExit()
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) // Check if ESC key is pressed
 		{
 			system("CLS");
-			SetColor(4);
+			SetColor(RED);
 			std::cout << "Escape key pressed, exiting...\n";
 			exit(0);
 		}

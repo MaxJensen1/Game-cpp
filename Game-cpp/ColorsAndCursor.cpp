@@ -21,7 +21,7 @@ Color codes for SetColor()
 15 = Bright White
 */
 
-void ColorsAndCursor::SetColor(int textColor, int backgroundColor)
+void ColorsAndCursor::SetColor(ConsoleColor textColor, ConsoleColor backgroundColor)
 {
 	// Avoiding errors in case someone were to input an invalid color code.
 	if ((0 <= textColor && textColor <= 15) && (0 <= backgroundColor && backgroundColor <= 15))
@@ -32,15 +32,15 @@ void ColorsAndCursor::SetColor(int textColor, int backgroundColor)
 	}
 }
 
-void ColorsAndCursor::SetColor(int textColor)
+void ColorsAndCursor::SetColor(ConsoleColor textColor)
 {
 	// 0 is black (default bg color).
-	SetColor(textColor, 0);
+	SetColor(textColor, BLACK);
 }
 
 void ColorsAndCursor::ResetColor()
 {
-	SetColor(7, 0); // White and black
+	SetColor(WHITE, BLACK); // White and black
 }
 
 void ColorsAndCursor::SetCursorPosition(int x, int y)
@@ -56,9 +56,22 @@ void ColorsAndCursor::SetCursorPosition(int x, int y)
 	SetConsoleCursorPosition(consoleHandle, position);
 }
 
-int ColorsAndCursor::ScreenWidth()
+void ColorsAndCursor::SetNewConsoleSize(int width, int height)
 {
-	// Retrieve console buffer info
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD size; // Has an x and y coordinate (width and height)
+
+	size.X = width;
+	size.Y = height;
+
+	SetConsoleScreenBufferSize(consoleHandle, size);
+
+	SMALL_RECT windowSize = { 0, 0, width - 1, height - 1 };
+	SetConsoleWindowInfo(consoleHandle, TRUE, &windowSize);
+}
+
+int ColorsAndCursor::GetConsoleWidth()
+{
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
@@ -66,9 +79,8 @@ int ColorsAndCursor::ScreenWidth()
 	return width;
 }
 
-int ColorsAndCursor::ScreenHeight()
+int ColorsAndCursor::GetConsoleHeight()
 {
-	// Retrieve console buffer info
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 

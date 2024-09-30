@@ -55,7 +55,7 @@ void Difficulty::DifficultyText()
     int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 
-    std::string message = "Difficulty Increase: Level " + difficulty;
+    std::string message = "Difficulty Increase: Level " + std::to_string(difficulty);
     int left = (width - message.length()) / 2;
     int top = height / 2;
 
