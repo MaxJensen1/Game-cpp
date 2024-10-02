@@ -2,22 +2,33 @@
 
 void Game::Run()
 {
+	HideConsoleCursor();
+
 	asteroidFallTimer.Start();
 	levelTimer.Start();
 
+	StartUPSThread(); // Run updates per second counter on a separate thread
+
 	while (true)
 	{
-		//system("CLS"); // Clear the console
+		updates++;
+		drawing.ClearQueue(); // Clears the previous loop's drawing array
 
-		player.AddToDrawQueue(drawing);
-		drawing.DrawGame();
 		player.HandleInputs();
+		player.AddToDrawQueue(drawing);
 		LevelsCheck(); // Keeps track of the levels with timers, draws timer and Hi-Score and increases difficulty
 		HandleAsteroids(); // Spawn asteroids, draw them and check collisions with the player
 
+		drawing.DrawGame(); // Prints the drawing array
+
 		if (levelActive) { hiScore++; } // Only add to the Hi-Score while a level is active
 
-	    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+	    std::this_thread::sleep_for(std::chrono::milliseconds(25));
+
+		// Display UPS value (updated by the separate thread)
+		SetCursorPosition(0, 1); // Adjust cursor position to where you want to display UPS
+		SetColor(WHITE);
+		std::cout << "UPS: " << ups << "        " << std::flush; // Print UPS with enough spacing
 	}
 }
 
@@ -39,6 +50,7 @@ void Game::LevelsCheck()
 
 	if (!levelActive && timerBetweenLevels.UpdateTimer(secondsBetweenLevels) >= secondsBetweenLevels)
 	{
+		difficulty.DifficultyText(false);
 		// Stop the between-level timer and reset everything to start a new level
 		timerBetweenLevels.Stop();
 		asteroidSpawner.spawnAsteroids = true;
@@ -49,14 +61,14 @@ void Game::LevelsCheck()
 		levelTimer.Restart();
 	}
 
-	if (printDifficulty) { difficulty.DifficultyText(); } // Prints the difficulty text once a level has been completed
+	if (printDifficulty) { difficulty.DifficultyText(true); } // Prints the difficulty text once a level has been completed
 }
 
 void Game::HandleAsteroids()
 {
 	asteroidSpawner.SpawnAsteroid(difficulty.asteroidSpawnAmount, asteroids);
 
-	for (auto asteroid = asteroids.begin(); asteroid != asteroids.end();)
+	for (auto asteroid = asteroids.begin(); asteroid != asteroids.end();) // Loop through the enitre array
 	{
 		if ((*asteroid)->Fall(asteroidFallSpeed)) // Returns true when asteroids have reached the bottom
 		{
@@ -65,7 +77,7 @@ void Game::HandleAsteroids()
 		}
 		else
 		{
-			(*asteroid)->Draw(); // Draw the asteroid if it's not deleted
+			(*asteroid)->AddToDrawQueue(drawing); // Draw the asteroid if it's not deleted
 			++asteroid; // Move to the next asteroid
 		}
 		
@@ -83,14 +95,7 @@ void Game::ContinueOrExit()
 	std::cout << "Game over!" << "\n";
 
 	SetColor(WHITE);
-	if (difficulty.difficulty > 1)
-	{
-		std::cout << "Completed levels: " << (difficulty.difficulty - 1) << "\n";
-	}
-	else
-	{
-		std::cout << "Completed levels: " << (difficulty.difficulty) << "\n";
-	}
+	std::cout << "Completed levels: " << (difficulty.difficulty - 1) << "\n";
 	std::cout << "HI-Score: " << hiScore << "\n";
 	std::cout << "\nPress [ESC] to exit or [ENTER] to play again." << "\n";
 
@@ -114,9 +119,31 @@ void Game::ContinueOrExit()
 
 void Game::Reset()
 {
+	system("CLS");
 	hiScore = 0;
 	asteroids.clear();
 	player.SetDefaultPos();
 	asteroidFallSpeed = 1;
 	difficulty.asteroidSpawnAmount = 10;
+	difficulty.difficulty = 0;
+	levelTimer.Restart();
+}
+
+void Game::StartUPSThread()
+{
+	// Start a thread that continuously updates the UPS value every 0,5 seconds
+	std::thread upsThread([this]()
+	{
+		while (true)
+		{
+			// Store the current number of updates and reset the counter
+			int currentUpdates = updates.exchange(0);
+
+			ups = currentUpdates;
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Sleep for 0,5 seconds
+		}
+	});
+
+	upsThread.detach(); // Detach thread to let it run independently
 }

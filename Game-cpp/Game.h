@@ -3,15 +3,16 @@
 #include <chrono>
 #include <vector>
 #include <thread>
+#include <atomic>
 #include "Player.h"
 #include "Asteroid.h"
 #include "Difficulty.h"
 #include "AsteroidSpawner.h"
 #include "CountdownTimer.h"
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 #include "Drawing.h"
 
-class Game: public ColorsAndCursor
+class Game: public ConsoleGraphics
 {
 public:
 	Game(): player(5, 4), levelTimer(secondsPerLevel), timerBetweenLevels(secondsBetweenLevels), asteroidFallTimer(2)
@@ -32,6 +33,11 @@ private:
 	bool printDifficulty = false;
 
 private:
+	// Using atomic variables because multiple threads can access them without interfering each other
+	std::atomic<int> updates{ 0 };
+	std::atomic<int> ups{ 0 };
+
+private:
 	std::vector<Asteroid*> asteroids;
 	Player player;
 	Difficulty difficulty;
@@ -46,4 +52,5 @@ private:
 	void HandleAsteroids();
 	void ContinueOrExit();
 	void Reset();
+	void StartUPSThread();
 };

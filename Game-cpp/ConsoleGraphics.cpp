@@ -1,5 +1,5 @@
 #pragma once
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 
 /*
 Color codes for SetColor()
@@ -21,7 +21,7 @@ Color codes for SetColor()
 15 = Bright White
 */
 
-void ColorsAndCursor::SetColor(ConsoleColor textColor, ConsoleColor backgroundColor)
+void ConsoleGraphics::SetColor(ConsoleColor textColor, ConsoleColor backgroundColor)
 {
 	// Avoiding errors in case someone were to input an invalid color code.
 	if ((0 <= textColor && textColor <= 15) && (0 <= backgroundColor && backgroundColor <= 15))
@@ -32,18 +32,18 @@ void ColorsAndCursor::SetColor(ConsoleColor textColor, ConsoleColor backgroundCo
 	}
 }
 
-void ColorsAndCursor::SetColor(ConsoleColor textColor)
+void ConsoleGraphics::SetColor(ConsoleColor textColor)
 {
 	// 0 is black (default bg color).
 	SetColor(textColor, BLACK);
 }
 
-void ColorsAndCursor::ResetColor()
+void ConsoleGraphics::ResetColor()
 {
 	SetColor(WHITE, BLACK); // White and black
 }
 
-void ColorsAndCursor::SetCursorPosition(int x, int y)
+void ConsoleGraphics::SetCursorPosition(int x, int y)
 {
 	// Get the handle to the console window
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -56,7 +56,27 @@ void ColorsAndCursor::SetCursorPosition(int x, int y)
 	SetConsoleCursorPosition(consoleHandle, position);
 }
 
-void ColorsAndCursor::SetNewConsoleSize(int width, int height)
+void ConsoleGraphics::HideConsoleCursor()
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // Get the handle to the console output
+	CONSOLE_CURSOR_INFO cursorInfo;
+
+	GetConsoleCursorInfo(hConsole, &cursorInfo); // Get current cursor info
+	cursorInfo.bVisible = FALSE; // Set cursor visibility to false
+	SetConsoleCursorInfo(hConsole, &cursorInfo); // Set the modified cursor info
+}
+
+void ConsoleGraphics::ShowConsoleCursor()
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // Get the handle to the console output
+	CONSOLE_CURSOR_INFO cursorInfo;
+
+	GetConsoleCursorInfo(hConsole, &cursorInfo); // Get current cursor info
+	cursorInfo.bVisible = TRUE; // Set cursor visibility to true
+	SetConsoleCursorInfo(hConsole, &cursorInfo); // Set the modified cursor info
+}
+
+void ConsoleGraphics::SetNewConsoleSize(int width, int height)
 {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD size; // Has an x and y coordinate (width and height)
@@ -70,7 +90,7 @@ void ColorsAndCursor::SetNewConsoleSize(int width, int height)
 	SetConsoleWindowInfo(consoleHandle, TRUE, &windowSize);
 }
 
-int ColorsAndCursor::GetConsoleWidth()
+int ConsoleGraphics::GetConsoleWidth()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -79,7 +99,7 @@ int ColorsAndCursor::GetConsoleWidth()
 	return width;
 }
 
-int ColorsAndCursor::GetConsoleHeight()
+int ConsoleGraphics::GetConsoleHeight()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);

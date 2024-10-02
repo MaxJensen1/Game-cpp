@@ -3,9 +3,9 @@
 #include <iostream>
 #include <iomanip> // For std::setw
 #include <algorithm> // For std::max
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 
-class CountdownTimer: public ColorsAndCursor
+class CountdownTimer: public ConsoleGraphics
 {
 public:
     CountdownTimer(int seconds): timeInSeconds(seconds), running(false) 

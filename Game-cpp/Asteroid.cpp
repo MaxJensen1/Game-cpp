@@ -1,14 +1,16 @@
 #include "Asteroid.h"
 
-void Asteroid::Draw()
+void Asteroid::AddToDrawQueue(Drawing& drawing)
 {
-	SetColor(RED);
-	SetCursorPosition(x, y);
-	std::cout << "O\n";
-	
-	SetColor(YELLOW);
-	SetCursorPosition(x, y - 1);
-	std::cout << "|\n";
+	///////////
+	//       //
+	//   |   //
+	//   O   //
+	//       //
+	///////////
+
+	drawing.AddToDrawQueue(x, y + 1, '|', YELLOW);
+	drawing.AddToDrawQueue(x, y + 2, 'O', RED);
 }
 
 bool Asteroid::Fall(int fallSpeed)

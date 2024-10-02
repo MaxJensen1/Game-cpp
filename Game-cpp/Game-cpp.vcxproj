@@ -130,7 +130,7 @@
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="AsteroidSpawner.cpp" />
     <ClCompile Include="AsteroidSpawner.h" />
-    <ClCompile Include="ColorsAndCursor.cpp" />
+    <ClCompile Include="ConsoleGraphics.cpp" />
     <ClCompile Include="CountdownTimer.cpp" />
     <ClCompile Include="CountdownTimer.h" />
     <ClCompile Include="Difficulty.cpp" />
@@ -142,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="ColorsAndCursor.h" />
+    <ClInclude Include="ConsoleGraphics.h" />
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />

@@ -3,10 +3,10 @@
 #include <thread>
 #include <chrono>
 #include <Windows.h>
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 #include "Player.h"
 
-class Difficulty: public ColorsAndCursor
+class Difficulty: public ConsoleGraphics
 {
 public:
 	//Player* player;
@@ -19,7 +19,7 @@ public:
 	bool canSpawnAsteroid = true;
 
 	void IncreaseDifficulty();
-	void DifficultyText();
+	void DifficultyText(bool displaytext);
 	/*void DifficultyCountdown();
 	void CountdownToText(int, bool&);*/
 };

@@ -59,76 +59,39 @@ void Player::MoveDown()
 
 void Player::AddToDrawQueue(Drawing& drawing)
 {
-    // Clear previous position
-    drawing.AddToDrawQueue(prevX - 3, prevY - 2, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(prevX - 2, prevY - 2, ' ', BLUE); // Left part of the ship
-    drawing.AddToDrawQueue(prevX - 1, prevY - 2, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(prevX - 0, prevY - 2, ' ', BLUE); // Right part of the ship
-
-    drawing.AddToDrawQueue(prevX - 3, prevY - 1, ' ', WHITE); // Space for the left part
-    drawing.AddToDrawQueue(prevX - 2, prevY - 1, ' ', WHITE); // Left part of the ship
-    drawing.AddToDrawQueue(prevX - 1, prevY - 1, ' ', WHITE); // Center part of the ship
-    drawing.AddToDrawQueue(prevX - 0, prevY - 1, ' ', WHITE); // Right part of the ship
-
-    drawing.AddToDrawQueue(prevX - 4, prevY, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(prevX - 3, prevY, ' ', BLUE); // Left part of the ship
-    drawing.AddToDrawQueue(prevX - 2, prevY, ' ', BLUE); // Middle part of the ship
-    drawing.AddToDrawQueue(prevX - 1, prevY, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(prevX - 0, prevY, ' ', BLUE); // Middle part of the ship
-    drawing.AddToDrawQueue(prevX + 1, prevY, ' ', BLUE); // Right part of the ship
-
-    drawing.AddToDrawQueue(prevX - 3, prevY + 1, ' ', RED); // Space for the left thruster
-    drawing.AddToDrawQueue(prevX - 2, prevY + 1, ' ', RED); // Left thruster
-    drawing.AddToDrawQueue(prevX - 1, prevY + 1, ' ', RED); // Middle space
-    drawing.AddToDrawQueue(prevX - 0, prevY + 1, ' ', RED); // Right thruster
-
-
+    ///////////////
+    //           //
+    //    / \    //
+    //    |o|    //
+    //   /_ _\   //
+    //    ^ ^    //
+    ///////////////
+    
     // Draw top part of the ship in blue
-    drawing.AddToDrawQueue(x - 3, y - 2, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(x - 2, y - 2, '/', BLUE); // Left part of the ship
-    drawing.AddToDrawQueue(x - 1, y - 2, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(x - 0, y - 2, '\\', BLUE); // Right part of the ship
+    drawing.AddToDrawQueue(x - 3, y - 2, ' ', BLUE);
+    drawing.AddToDrawQueue(x - 2, y - 2, '/', BLUE);
+    drawing.AddToDrawQueue(x - 1, y - 2, ' ', BLUE);
+    drawing.AddToDrawQueue(x - 0, y - 2, '\\', BLUE);
 
     // Draw middle part of the ship in white
-    drawing.AddToDrawQueue(x - 3, y - 1, ' ', WHITE); // Space for the left part
-    drawing.AddToDrawQueue(x - 2, y - 1, '|', WHITE); // Left part of the ship
-    drawing.AddToDrawQueue(x - 1, y - 1, 'o', WHITE); // Center part of the ship
-    drawing.AddToDrawQueue(x - 0, y - 1, '|', WHITE); // Right part of the ship
+    drawing.AddToDrawQueue(x - 3, y - 1, ' ', WHITE);
+    drawing.AddToDrawQueue(x - 2, y - 1, '|', WHITE);
+    drawing.AddToDrawQueue(x - 1, y - 1, 'o', WHITE);
+    drawing.AddToDrawQueue(x - 0, y - 1, '|', WHITE);
 
     // Draw bottom part of the ship in blue
-    drawing.AddToDrawQueue(x - 4, y, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(x - 3, y, '/', BLUE); // Left part of the ship
-    drawing.AddToDrawQueue(x - 2, y, '_', BLUE); // Middle part of the ship
-    drawing.AddToDrawQueue(x - 1, y, ' ', BLUE); // Space for the left part
-    drawing.AddToDrawQueue(x - 0, y, '_', BLUE); // Middle part of the ship
-    drawing.AddToDrawQueue(x + 1, y, '\\', BLUE); // Right part of the ship
+    drawing.AddToDrawQueue(x - 4, y, ' ', BLUE);
+    drawing.AddToDrawQueue(x - 3, y, '/', BLUE);
+    drawing.AddToDrawQueue(x - 2, y, '_', BLUE);
+    drawing.AddToDrawQueue(x - 1, y, ' ', BLUE);
+    drawing.AddToDrawQueue(x - 0, y, '_', BLUE);
+    drawing.AddToDrawQueue(x + 1, y, '\\', BLUE);
 
     // Draw thrusters in red
-    drawing.AddToDrawQueue(x - 3, y + 1, ' ', RED); // Space for the left thruster
-    drawing.AddToDrawQueue(x - 2, y + 1, '^', RED); // Left thruster
-    drawing.AddToDrawQueue(x - 1, y + 1, ' ', RED); // Middle space
-    drawing.AddToDrawQueue(x - 0, y + 1, '^', RED); // Right thruster
-
-
-    //// Draw top part of the ship in blue
-    //SetColor(BLUE);
-    //SetCursorPosition(x - 3, y - 2);
-    //std::cout << " / \\" << std::endl;
-
-    //// Draw middle part of the ship in white
-    //SetColor(WHITE);
-    //SetCursorPosition(x - 3, y - 1);
-    //std::cout << " |o|" << std::endl;
-
-    //// Draw bottom part of the ship in blue
-    //SetColor(BLUE);
-    //SetCursorPosition(x - 3, y);
-    //std::cout << "/_ _\\" << std::endl;
-
-    //// Draw thrusters in red
-    //SetColor(RED);
-    //SetCursorPosition(x - 3, y + 1);
-    //std::cout << " ^ ^" << std::endl;
+    drawing.AddToDrawQueue(x - 3, y + 1, ' ', RED);
+    drawing.AddToDrawQueue(x - 2, y + 1, '^', RED);
+    drawing.AddToDrawQueue(x - 1, y + 1, ' ', RED);
+    drawing.AddToDrawQueue(x - 0, y + 1, '^', RED);
 }
 
 void Player::SetDefaultPos()

@@ -2,20 +2,21 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 #include "Player.h"
+#include "Drawing.h"
 
-class Asteroid : public ColorsAndCursor
+class Asteroid : public ConsoleGraphics
 {
 public:
 	Asteroid(int X, int Y) : x(X), y(Y) {}
 
-	void Draw();
+	void AddToDrawQueue(Drawing& drawing);
 	bool Fall(int fallSpeed);
 
 	int x;
 	int y;
 
 private:
-	ColorsAndCursor colorsAndCursor;
+	ConsoleGraphics colorsAndCursor;
 };

@@ -50,5 +50,11 @@ void CountdownTimer::DrawTimer(int hiscore, double countdown, int secondsPerLeve
     SetColor(AQUA);
     std::cout << "Time remaining: ";
     SetColor(BRIGHT_WHITE);
+    if (timerSeconds < 10)
+    {
+        std::cout << "0" << timerSeconds << " s";
+        return;
+    }
+
     std::cout << timerSeconds << " s";
 }

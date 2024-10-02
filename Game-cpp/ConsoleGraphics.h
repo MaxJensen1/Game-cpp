@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 
-class ColorsAndCursor
+class ConsoleGraphics
 {
 protected:
 	enum ConsoleColor
@@ -51,6 +51,16 @@ protected:
 	/// <param name="x"></param>
 	/// <param name="y"></param>
 	void SetCursorPosition(int x, int y);
+
+	/// <summary>
+	/// Hides the cursor in the console.
+	/// </summary>
+	void HideConsoleCursor();
+
+	/// <summary>
+	/// Shows the cursor in the console.
+	/// </summary>
+	void ShowConsoleCursor();
 
 	/// <summary>
 	/// Set console size to input.

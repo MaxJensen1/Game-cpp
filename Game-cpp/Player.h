@@ -2,20 +2,19 @@
 #include <iostream>
 #include <windows.h>
 #include <vector>
-#include "ColorsAndCursor.h"
+#include "ConsoleGraphics.h"
 #include "Asteroid.h"
 #include "Drawing.h"
 
 class Asteroid;
 
-class Player: public ColorsAndCursor
+class Player: public ConsoleGraphics
 {
 public:
 	Player(int X, int Y)
 	{
 		x = X;
 		y = Y;
-
 		SetDefaultPos();
 	}
 	void HandleInputs();
@@ -27,6 +26,7 @@ public:
 	void SetDefaultPos();
 	bool IsCollision(std::vector<Asteroid*> asteroids);
 
+public:
 	int x;
 	int y;
 	int lifePoints = 3;
