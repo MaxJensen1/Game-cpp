@@ -24,7 +24,7 @@ public:
 
 private:
 	int hiScore = 0;
-	int asteroidFallSpeed = 1; // 1 by default
+	int asteroidFallSpeed = 0; // 1 by default
 	int gameUpdateTime = 100;
 	int secondsPerLevel = 15;
 	int secondsBetweenLevels = 6;

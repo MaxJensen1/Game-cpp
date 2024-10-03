@@ -29,7 +29,6 @@ public:
 public:
 	int x;
 	int y;
-	int lifePoints = 3;
 
 private:
 	int prevX;

@@ -59,39 +59,39 @@ void Player::MoveDown()
 
 void Player::AddToDrawQueue(Drawing& drawing)
 {
-    ///////////////
-    //           //
-    //    / \    //
-    //    |o|    //
-    //   /_ _\   //
-    //    ^ ^    //
-    ///////////////
+    //////////////////////
+    //                  //
+    //   y - 2   / \    //
+    //   y - 1   |o|    //
+    //   y + 0  /_ _\   //
+    //   y + 1   ^ ^    //
+    //                  //
+    //////////////////////
     
     // Draw top part of the ship in blue
-    drawing.AddToDrawQueue(x - 3, y - 2, ' ', BLUE);
-    drawing.AddToDrawQueue(x - 2, y - 2, '/', BLUE);
-    drawing.AddToDrawQueue(x - 1, y - 2, ' ', BLUE);
-    drawing.AddToDrawQueue(x - 0, y - 2, '\\', BLUE);
+    drawing.AddToDrawQueue(x + 0, y - 2, ' ', BLUE);
+    drawing.AddToDrawQueue(x + 1, y - 2, '/', BLUE);
+    drawing.AddToDrawQueue(x + 2, y - 2, ' ', BLUE);
+    drawing.AddToDrawQueue(x + 3, y - 2, '\\', BLUE);
 
     // Draw middle part of the ship in white
-    drawing.AddToDrawQueue(x - 3, y - 1, ' ', WHITE);
-    drawing.AddToDrawQueue(x - 2, y - 1, '|', WHITE);
-    drawing.AddToDrawQueue(x - 1, y - 1, 'o', WHITE);
-    drawing.AddToDrawQueue(x - 0, y - 1, '|', WHITE);
+    drawing.AddToDrawQueue(x + 0, y - 1, ' ', WHITE);
+    drawing.AddToDrawQueue(x + 1, y - 1, '|', WHITE);
+    drawing.AddToDrawQueue(x + 2, y - 1, 'o', WHITE);
+    drawing.AddToDrawQueue(x + 3, y - 1, '|', WHITE);
 
     // Draw bottom part of the ship in blue
-    drawing.AddToDrawQueue(x - 4, y, ' ', BLUE);
-    drawing.AddToDrawQueue(x - 3, y, '/', BLUE);
-    drawing.AddToDrawQueue(x - 2, y, '_', BLUE);
-    drawing.AddToDrawQueue(x - 1, y, ' ', BLUE);
-    drawing.AddToDrawQueue(x - 0, y, '_', BLUE);
-    drawing.AddToDrawQueue(x + 1, y, '\\', BLUE);
+    drawing.AddToDrawQueue(x + 0, y, '/', BLUE);
+    drawing.AddToDrawQueue(x + 1, y, '_', BLUE);
+    drawing.AddToDrawQueue(x + 2, y, ' ', BLUE);
+    drawing.AddToDrawQueue(x + 3, y, '_', BLUE);
+    drawing.AddToDrawQueue(x + 4, y, '\\', BLUE);
 
     // Draw thrusters in red
-    drawing.AddToDrawQueue(x - 3, y + 1, ' ', RED);
-    drawing.AddToDrawQueue(x - 2, y + 1, '^', RED);
-    drawing.AddToDrawQueue(x - 1, y + 1, ' ', RED);
-    drawing.AddToDrawQueue(x - 0, y + 1, '^', RED);
+    drawing.AddToDrawQueue(x + 0, y + 1, ' ', RED);
+    drawing.AddToDrawQueue(x + 1, y + 1, '^', RED);
+    drawing.AddToDrawQueue(x + 2, y + 1, ' ', RED);
+    drawing.AddToDrawQueue(x + 3, y + 1, '^', RED);
 }
 
 void Player::SetDefaultPos()
@@ -109,10 +109,10 @@ bool Player::IsCollision(std::vector<Asteroid*> asteroids)
         int toleranceMiddle = 1;
         int toleranceBottom = 2;
 
-        // Adjust the X coordinates in the collision checks to make the collision box wider
-        bool topCollision = abs(x - 1 - asteroid->x) <= toleranceTop && y - 2 == asteroid->y; // Checks only the y-level it's on
-        bool middleCollision = abs(x - 1 - asteroid->x) <= toleranceMiddle && abs(y - asteroid->y) == 1;
-        bool bottomCollision = abs(x - 1 - asteroid->x) <= toleranceBottom && abs(y - asteroid->y) <= 0;
+        // First check if the x value is inside the tolerance, then check the y level to decide which part of the ship it is (top, middle or bottom)
+        bool topCollision = abs((x + 2) - asteroid->x) <= toleranceTop && abs((y - 2) - asteroid->y) == 2;
+        bool middleCollision = abs((x + 2) - asteroid->x) <= toleranceMiddle && abs((y - 1) - asteroid->y) == 2;
+        bool bottomCollision = abs((x + 2) - asteroid->x) <= toleranceBottom && abs((y - 0) - asteroid->y) == 2;
 
         if (topCollision || middleCollision || bottomCollision) // If a collision is detected, return true
         {
