@@ -109,10 +109,11 @@ bool Player::IsCollision(std::vector<Asteroid*> asteroids)
         int toleranceMiddle = 1;
         int toleranceBottom = 2;
 
-        // First check if the x value is inside the tolerance, then check the y level to decide which part of the ship it is (top, middle or bottom)
-        bool topCollision = abs((x + 2) - asteroid->x) <= toleranceTop && abs((y - 2) - asteroid->y) == 2;
-        bool middleCollision = abs((x + 2) - asteroid->x) <= toleranceMiddle && abs((y - 1) - asteroid->y) == 2;
-        bool bottomCollision = abs((x + 2) - asteroid->x) <= toleranceBottom && abs((y - 0) - asteroid->y) == 2;
+        // First check if the x value in the middle of the ship (x + 2) is inside the tolerance, then check the y level to 
+        // decide which part of the ship it is (top, middle or bottom).I have no idea why it has to be == 2. 
+        bool topCollision       = abs((x + 2) - asteroid->x) <= toleranceTop    && abs((y - 2) - asteroid->y) == 2;
+        bool middleCollision    = abs((x + 2) - asteroid->x) <= toleranceMiddle && abs((y - 1) - asteroid->y) == 2;
+        bool bottomCollision    = abs((x + 2) - asteroid->x) <= toleranceBottom && abs((y - 0) - asteroid->y) == 2;
 
         if (topCollision || middleCollision || bottomCollision) // If a collision is detected, return true
         {
