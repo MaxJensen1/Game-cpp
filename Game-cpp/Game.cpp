@@ -137,7 +137,7 @@ void Game::StartUPSThread()
 		while (true)
 		{
 			// Store the current number of updates and reset the counter
-			int currentUpdates = updates.exchange(0);
+			uint16_t currentUpdates = updates.exchange(0);
 
 			ups = currentUpdates;
 

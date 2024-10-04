@@ -13,7 +13,7 @@ void Asteroid::AddToDrawQueue(Drawing& drawing)
 	drawing.AddToDrawQueue(x, y + 2, 'O', RED);
 }
 
-bool Asteroid::Fall(int fallSpeed)
+bool Asteroid::Fall(uint8_t fallSpeed)
 {
 	if (y <= GetConsoleHeight() - 4)
 	{

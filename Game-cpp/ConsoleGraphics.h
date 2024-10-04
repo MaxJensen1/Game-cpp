@@ -2,6 +2,7 @@
 #include <iostream>
 #include <windows.h>
 #include <string>
+#include <cstdint>
 
 class ConsoleGraphics
 {
@@ -50,7 +51,7 @@ protected:
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
-	void SetCursorPosition(int x, int y);
+	void SetCursorPosition(uint16_t x, uint16_t y);
 
 	/// <summary>
 	/// Hides the cursor in the console.
@@ -67,7 +68,7 @@ protected:
 	/// </summary>
 	/// <param name="width"></param>
 	/// <param name="height"></param>
-	void SetNewConsoleSize(int width, int height);
+	void SetNewConsoleSize(uint16_t width, uint16_t height);
 
 	/// <summary>
 	/// Returns the width of the console window.

@@ -2,9 +2,9 @@
 
 void Drawing::DrawGame()
 {
-    for (int y = 0; y < height; ++y)
+    for (int8_t y = 0; y < height; ++y)
     {
-        for (int x = 0; x < width; ++x)
+        for (int16_t x = 0; x < width; ++x)
         {
             if (gameGrid[y][x] != ' ') // Only draw if the character is not a space
             {
@@ -18,9 +18,9 @@ void Drawing::DrawGame()
 
 void Drawing::ClearQueue()
 {
-    for (int y = 0; y < height; ++y)
+    for (int8_t y = 0; y < height; ++y)
     {
-        for (int x = 0; x < width; ++x)
+        for (int16_t x = 0; x < width; ++x)
         {
             // Set any non-empty cell to empty
             if (prevGameGrid[y][x] != ' ')
@@ -34,7 +34,7 @@ void Drawing::ClearQueue()
     }
 }
 
-void Drawing::AddToDrawQueue(int x, int y, char symbol, ConsoleColor color)
+void Drawing::AddToDrawQueue(int16_t x, int16_t y, char symbol, ConsoleColor color)
 {
     prevGameGrid = gameGrid; // Keep track of gameGrid before it's updated
 

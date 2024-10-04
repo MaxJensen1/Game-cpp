@@ -23,11 +23,10 @@ public:
 	void Run();
 
 private:
-	int hiScore = 0;
-	int asteroidFallSpeed = 0; // 1 by default
-	int gameUpdateTime = 100;
-	int secondsPerLevel = 15;
-	int secondsBetweenLevels = 6;
+	uint16_t hiScore = 0;
+	uint8_t asteroidFallSpeed = 1; // 1 by default
+	uint8_t secondsPerLevel = 15;
+	uint8_t secondsBetweenLevels = 6;
 	float asteroidFallDelay = 0.025f;
 	bool levelActive = true;
 	bool printDifficulty = false;
@@ -35,7 +34,7 @@ private:
 private:
 	// Using atomic variables because multiple threads can access them without interfering each other
 	std::atomic<int> updates{ 0 };
-	std::atomic<int> ups{ 0 };
+	std::atomic<uint16_t> ups{ 0 };
 
 private:
 	std::vector<Asteroid*> asteroids;

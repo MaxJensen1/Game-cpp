@@ -20,7 +20,7 @@ void CountdownTimer::Stop() // Stops the timer
     running = false;
 }
 
-float CountdownTimer::UpdateTimer(int hiscore, float seconds, bool drawTimer)
+float CountdownTimer::UpdateTimer(uint16_t hiscore, float seconds, bool drawTimer)
 {
     if (drawTimer)
     {
@@ -37,7 +37,7 @@ float CountdownTimer::UpdateTimer(float seconds)
     return elapsed.count();
 }
 
-void CountdownTimer::DrawTimer(int hiscore, double countdown, int secondsPerLevel)
+void CountdownTimer::DrawTimer(uint16_t hiscore, float countdown, uint8_t secondsPerLevel)
 {
     SetCursorPosition(0, 0);
     SetColor(AQUA);

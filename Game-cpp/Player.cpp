@@ -25,7 +25,6 @@ void Player::MoveLeft()
 {
     if (x >= 5)
     {
-        prevX = x;
         x -= 2;
     }
 }
@@ -34,7 +33,6 @@ void Player::MoveRight()
 {
     if (x <= GetConsoleWidth() - 4)
     {
-        prevX = x;
         x += 2;
     }
 }
@@ -43,7 +41,6 @@ void Player::MoveUp()
 {
     if (y >= 3)
     {
-        prevY = y;
         y -= 1;
     }
 }
@@ -52,7 +49,6 @@ void Player::MoveDown()
 {
     if (y <= GetConsoleHeight() - 4)
     {
-        prevY = y;
         y += 1;
     }
 }
@@ -104,11 +100,6 @@ bool Player::IsCollision(std::vector<Asteroid*> asteroids)
 {
     for (auto asteroid : asteroids)
     {
-        // Collision box for top, middle, and bottom part of the ship
-        int toleranceTop = 1;
-        int toleranceMiddle = 1;
-        int toleranceBottom = 2;
-
         // First check if the x value in the middle of the ship (x + 2) is inside the tolerance, then check the y level to 
         // decide which part of the ship it is (top, middle or bottom).I have no idea why it has to be == 2. 
         bool topCollision       = abs((x + 2) - asteroid->x) <= toleranceTop    && abs((y - 2) - asteroid->y) == 2;

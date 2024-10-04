@@ -2,7 +2,7 @@
 #include "ConsoleGraphics.h"
 
 /*
-Color codes for SetColor()
+Color codes
 0 = Black
 1 = Blue
 2 = Green
@@ -43,7 +43,7 @@ void ConsoleGraphics::ResetColor()
 	SetColor(WHITE, BLACK); // White and black
 }
 
-void ConsoleGraphics::SetCursorPosition(int x, int y)
+void ConsoleGraphics::SetCursorPosition(uint16_t x, uint16_t y)
 {
 	// Get the handle to the console window
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -76,7 +76,7 @@ void ConsoleGraphics::ShowConsoleCursor()
 	SetConsoleCursorInfo(hConsole, &cursorInfo); // Set the modified cursor info
 }
 
-void ConsoleGraphics::SetNewConsoleSize(int width, int height)
+void ConsoleGraphics::SetNewConsoleSize(uint16_t width, uint16_t height)
 {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD size; // Has an x and y coordinate (width and height)
