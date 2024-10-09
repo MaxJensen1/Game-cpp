@@ -24,7 +24,7 @@ float CountdownTimer::UpdateTimer(uint16_t hiscore, float seconds, bool drawTime
 {
     if (drawTimer)
     {
-        DrawTimer(hiscore, UpdateTimer(seconds), seconds); // Draw the timer after updating
+        DrawTimer(hiscore, UpdateTimer(seconds), uint8_t(seconds)); // Draw the timer after updating
     }
 
     return UpdateTimer(seconds);

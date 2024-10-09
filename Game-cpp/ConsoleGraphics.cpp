@@ -2,7 +2,7 @@
 #include "ConsoleGraphics.h"
 
 /*
-Color codes
+** Color codes: **
 0 = Black
 1 = Blue
 2 = Green
